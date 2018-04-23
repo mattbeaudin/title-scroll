@@ -1,4 +1,5 @@
 # title-scroll
+[![forthebadge](https://forthebadge.com/images/badges/uses-badges.svg)](https://forthebadge.com)
 Stupid little JavaScript library that makes the title on a webpage scroll so the entire message can be read.
 
 ## Usage
