@@ -1,11 +1,11 @@
 (function() {
 	function getParams(startAttr, speedAttr) {
-		var start = 3000;
-		var speed = 250;
+		let start = 3000;
+		let speed = 250;
 
-		var scripts = window.document.getElementsByTagName('script');
+		let scripts = window.document.getElementsByTagName('script');
 
-		for (var i = 0; i < scripts.length; i++) {
+		for (let i = 0; i < scripts.length; i++) {
 			if (scripts[i].src.indexOf('title-scroll.js') !== -1) {
 				if (scripts[i].getAttribute(startAttr) !== null && scripts[i].getAttribute(startAttr) !== "") {
 					start = scripts[i].getAttribute(startAttr);
@@ -23,10 +23,10 @@
 	}
 
 	window.addEventListener('load', () => {
-		var [start, speed] = getParams('data-start', 'data-speed');
+		let [start, speed] = getParams('data-start', 'data-speed');
 
-		var title = document.title + "  ---  ";
-		var i = 0;
+		let title = document.title + "  ---  ";
+		let i = 0;
 
 		setTimeout(function() {
 		    setInterval(function () {
