@@ -1,38 +1,38 @@
-var start = 3000;
-var speed = 250;
+(function() {
+	function getParams(startAttr, speedAttr) {
+		var start = 3000;
+		var speed = 250;
 
-function getParams(startAttr, speedAttr) {
-	var params = window.document.getElementsByTagName('script');
+		var scripts = window.document.getElementsByTagName('script');
 
-	for (var i = 0; i < params.length; i++) {
-		if (params[i].src.indexOf('title-scroll.js') !== -1) {
-			if (params[i].getAttribute(startAttr) !== null && params[i].getAttribute(startAttr) !== "") {
-				start = params[i].getAttribute(startAttr);
+		for (var i = 0; i < scripts.length; i++) {
+			if (scripts[i].src.indexOf('title-scroll.js') !== -1) {
+				if (scripts[i].getAttribute(startAttr) !== null && scripts[i].getAttribute(startAttr) !== "") {
+					start = scripts[i].getAttribute(startAttr);
+				}
+
+				if (scripts[i].getAttribute(speedAttr) !== null && scripts[i].getAttribute(speedAttr) !== "") {
+					speed = scripts[i].getAttribute(speedAttr);
+				}
+
+				break;
 			}
-
-			if (params[i].getAttribute(speedAttr) !== null && params[i].getAttribute(speedAttr) !== "") {
-				speed = params[i].getAttribute(speedAttr);
-			}
-
-			return;
 		}
+
+		return [start, speed];
 	}
-}
 
-window.onload = function(e) {
-	getParams('data-start', 'data-speed');
-	var title_ref = window.document.getElementsByTagName('title')[0];
-	var title = title_ref.text;
-	var i = 0;
+	window.addEventListener('load', () => {
+		var [start, speed] = getParams('data-start', 'data-speed');
 
-	setTimeout(function() {
-	    setInterval(function () {
-			title_ref.text = title.substr(i, title.length) + "  ---  " + title.substr(0, i);
-			i++;
+		var title = document.title + "  ---  ";
+		var i = 0;
 
-			if (i === title.length) {
-				i = 0;
-			}
-	    }, speed);
-	}, start);
-}
+		setTimeout(function() {
+		    setInterval(function () {
+				document.title = title.substr(i, title.length) + title.substr(0, i);
+				i = (i + 1) % title.length;
+		    }, speed);
+		}, start);
+	});
+})();
